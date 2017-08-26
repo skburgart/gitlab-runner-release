@@ -1,0 +1,10 @@
+#!/bin/bash
+
+/var/vcap/packages/gitlab-ci-multi-runner/bin/gitlab-ci-multi-runner unregister \
+  --config /var/vcap/store/gitlab-runner/config.toml \
+  --all-runners
+
+rm /var/vcap/store/gitlab-runner/config.toml
+
+echo 0 # sleep for zero seconds
+

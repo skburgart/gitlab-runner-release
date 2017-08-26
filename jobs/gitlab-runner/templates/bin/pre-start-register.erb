@@ -1,0 +1,12 @@
+#!/bin/bash
+
+mkdir -p /var/vcap/store/gitlab-runner
+
+/var/vcap/packages/gitlab-ci-multi-runner/bin/gitlab-ci-multi-runner register \
+  --non-interactive \
+  --config /var/vcap/store/gitlab-runner/config.toml \
+  --name <%= p('runner.name') %> \
+  --executor <%= p('runner.executor') %> \
+  --url <%= p('runner.registration.url') %> \
+  --registration-token <%= p('runner.registration.token') %>
+

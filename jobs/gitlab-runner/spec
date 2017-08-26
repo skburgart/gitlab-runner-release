@@ -2,10 +2,27 @@
 name: gitlab-runner
 
 templates:
-  pre-start-register.erb: bin/pre-start
-  drain-unregister.erb: bin/drain
+  bin/pre-start-register.erb: bin/pre-start
+  bin/drain-unregister.erb: bin/drain
+  bin/gitlab-runner-ctl.erb: bin/gitlab-runner-ctl
+  helpers/pid_utils.sh: helpers/pid_utils.sh
 
 packages:
 - gitlab-ci-multi-runner
 
-properties: {}
+properties:
+
+  runner.name:
+    description: Name of the runner as it will appear in Gitlab
+    default: gitlab-runner
+
+  runner.executor:
+    description: Executor used to run builds
+    default: shell
+
+  runner.registration.url:
+    description: URL of Gitlab server to register
+
+  runner.registration.token:
+    description: Registration token as provided by Gitlab
+

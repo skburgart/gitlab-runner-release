@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e -u -x
+
+RUN_DIR=/var/vcap/sys/run/gitlab-runner
+LOG_DIR=/var/vcap/sys/log/gitlab-runner
+STORE_DIR=/var/vcap/store/gitlab-runner
+PACKAGE_DIR=/var/vcap/packages/gitlab-ci-multi-runner
+PIDFILE=$RUN_DIR/pid
+
+source /var/vcap/jobs/gitlab-runner/helpers/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "gitlab-runner"
+
+    mkdir -p $RUN_DIR $LOG_DIR $STORE_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR $STORE_DIR
+
+    echo $$ > $PIDFILE
+
+    exec chpst -u vcap:vcap $PACKAGE_DIR/bin/gitlab-ci-multi-runner run \
+      --config /var/vcap/store/gitlab-runner/config.toml \
+      1>>$LOG_DIR/stdout.log \
+      2>>$LOG_DIR/stderr.log
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+
+    ;;
+
+esac
+
