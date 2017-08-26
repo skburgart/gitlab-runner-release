@@ -20,6 +20,9 @@ properties:
     description: Executor used to run builds
     default: shell
 
+  runner.tags:
+    description: Array of runner tags
+
   runner.registration.url:
     description: URL of Gitlab server to register
 

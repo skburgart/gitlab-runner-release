@@ -1,12 +1,10 @@
 #!/bin/bash
 
+set -e
+
 mkdir -p /var/vcap/store/gitlab-runner
 
-RUNNER_NAME="<%= p('runner.name') %>"
-
-<% if p("runner.append_index") -%>
-RUNNER_NAME="${RUNNER_NAME}-<%= spec.index %>"
-<% end -%>
+RUNNER_NAME="<%= p('runner.name') %><% if p("runner.append_index") -%>-<%= spec.index %><% end -%>"
 
 /var/vcap/packages/gitlab-ci-multi-runner/bin/gitlab-ci-multi-runner register \
   --non-interactive \
@@ -14,5 +12,8 @@ RUNNER_NAME="${RUNNER_NAME}-<%= spec.index %>"
   --name ${RUNNER_NAME} \
   --executor <%= p('runner.executor') %> \
   --url <%= p('runner.registration.url') %> \
+<% if_p('runner.tags') do | tags | -%>
+  --tag-list <%= tags.join(',') %> \
+<% end -%>
   --registration-token <%= p('runner.registration.token') %>
 
