@@ -1,7 +1,9 @@
 ---
 name: gitlab-runner
 
-templates: {}
+templates:
+  pre-start-register.erb: bin/pre-start
+  drain-unregister.erb: bin/drain
 
 packages:
 - gitlab-ci-multi-runner
