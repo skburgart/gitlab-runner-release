@@ -26,3 +26,7 @@ properties:
   runner.registration.token:
     description: Registration token as provided by Gitlab
 
+  runner.append_index:
+    description: Whether to append the instance group index to the runner name
+    default: false
+

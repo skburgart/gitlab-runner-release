@@ -2,10 +2,16 @@
 
 mkdir -p /var/vcap/store/gitlab-runner
 
+RUNNER_NAME="<%= p('runner.name') %>"
+
+<% if p("runner.append_index") -%>
+RUNNER_NAME="${RUNNER_NAME}-<%= spec.index %>"
+<% end -%>
+
 /var/vcap/packages/gitlab-ci-multi-runner/bin/gitlab-ci-multi-runner register \
   --non-interactive \
   --config /var/vcap/store/gitlab-runner/config.toml \
-  --name <%= p('runner.name') %> \
+  --name ${RUNNER_NAME} \
   --executor <%= p('runner.executor') %> \
   --url <%= p('runner.registration.url') %> \
   --registration-token <%= p('runner.registration.token') %>
