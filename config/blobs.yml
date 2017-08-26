@@ -1,1 +1,4 @@
---- {}
+gitlab-ci-multi-runner/gitlab-ci-multi-runner-linux-amd64-9.5.0:
+  size: 47938688
+  object_id: 05803078-18db-4108-70d8-1c4ae80e7192
+  sha: c444dd3e6305b5445a7da6ffeb94be4952560920

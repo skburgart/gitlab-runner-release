@@ -1,0 +1,8 @@
+---
+name: gitlab-ci-multi-runner
+
+dependencies: []
+
+files:
+- gitlab-ci-multi-runner/*
+

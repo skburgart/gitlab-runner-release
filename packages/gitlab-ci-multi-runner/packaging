@@ -1,0 +1,6 @@
+# abort script on any command that exits with a non zero value
+set -e
+
+chmod +x gitlab-ci-multi-runner/gitlab-ci-multi-runner-linux-amd64-*
+cp gitlab-ci-multi-runner/gitlab-ci-multi-runner-linux-amd64-* ${BOSH_INSTALL_TARGET}
+

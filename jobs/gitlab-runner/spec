@@ -3,6 +3,7 @@ name: gitlab-runner
 
 templates: {}
 
-packages: []
+packages:
+- gitlab-ci-multi-runner
 
 properties: {}
