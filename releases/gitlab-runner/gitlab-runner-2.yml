@@ -1,0 +1,15 @@
+name: gitlab-runner
+version: "2"
+commit_hash: 471da19
+uncommitted_changes: false
+jobs:
+- name: gitlab-runner
+  version: ccff70a4f541a69316d2495521b3a38fa15f5607
+  fingerprint: ccff70a4f541a69316d2495521b3a38fa15f5607
+  sha1: 579e28b2559fa3129d268b756a59cb3d961aed24
+packages:
+- name: gitlab-ci-multi-runner
+  version: e74933616e6df63bf4e1e54a870efa749d545893
+  fingerprint: e74933616e6df63bf4e1e54a870efa749d545893
+  sha1: 006ef42b537af9b5715300767df7342843354717
+  dependencies: []
