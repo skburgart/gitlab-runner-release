@@ -11,7 +11,12 @@ PIDFILE=$RUN_DIR/pid
 
 source /var/vcap/jobs/gitlab-runner/helpers/pid_utils.sh
 
-PATH=$PATH:/var/vcap/packages/git/bin/
+# Add all packages' /bin $PATH
+for package_dir in $(ls -d /var/vcap/packages/*); do
+  for package_bin_dir in $(ls -d ${package_dir}/bin); do
+    export PATH=${package_bin_dir}:$PATH
+  done
+done
 
 case $1 in
 
