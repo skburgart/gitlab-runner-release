@@ -1,3 +1,7 @@
+git/git-2.9.5.tar.gz:
+  size: 5928730
+  object_id: 6ddb2cbc-b71b-4904-6176-9718ac26cd3b
+  sha: 278eae9d50f89a519522f6b288cabcb5ca583ef6
 gitlab-ci-multi-runner/gitlab-ci-multi-runner-linux-amd64-9.5.0:
   size: 47938688
   object_id: 05803078-18db-4108-70d8-1c4ae80e7192

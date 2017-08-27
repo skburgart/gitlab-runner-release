@@ -1,0 +1,8 @@
+---
+name: git
+
+dependencies: []
+
+files:
+- git/*
+

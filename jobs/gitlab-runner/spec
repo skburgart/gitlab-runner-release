@@ -8,6 +8,7 @@ templates:
   helpers/pid_utils.sh: helpers/pid_utils.sh
 
 packages:
+- git
 - gitlab-ci-multi-runner
 
 properties:

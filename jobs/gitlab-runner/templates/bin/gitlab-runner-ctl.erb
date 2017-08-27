@@ -11,6 +11,8 @@ PIDFILE=$RUN_DIR/pid
 
 source /var/vcap/jobs/gitlab-runner/helpers/pid_utils.sh
 
+PATH=$PATH:/var/vcap/packages/git/bin/
+
 case $1 in
 
   start)

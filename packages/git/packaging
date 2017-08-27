@@ -1,0 +1,9 @@
+# abort script on any command that exits with a non zero value
+set -e
+
+cd git
+tar xvf git-2.9.5.tar.gz
+cd git-2.9.5
+./configure --prefix=${BOSH_INSTALL_TARGET}
+make install
+
