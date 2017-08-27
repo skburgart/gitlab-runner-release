@@ -6,6 +6,7 @@ RUN_DIR=/var/vcap/sys/run/gitlab-runner
 LOG_DIR=/var/vcap/sys/log/gitlab-runner
 STORE_DIR=/var/vcap/store/gitlab-runner
 PACKAGE_DIR=/var/vcap/packages/gitlab-ci-multi-runner
+WORK_DIR=${STORE_DIR}/work
 PIDFILE=$RUN_DIR/pid
 
 source /var/vcap/jobs/gitlab-runner/helpers/pid_utils.sh
@@ -15,13 +16,13 @@ case $1 in
   start)
     pid_guard $PIDFILE "gitlab-runner"
 
-    mkdir -p $RUN_DIR $LOG_DIR $STORE_DIR
+    mkdir -p $RUN_DIR $LOG_DIR $STORE_DIR $WORK_DIR
     chown -R vcap:vcap $RUN_DIR $LOG_DIR $STORE_DIR
 
     echo $$ > $PIDFILE
-
-    exec chpst -u vcap:vcap $PACKAGE_DIR/bin/gitlab-ci-multi-runner run \
+    exec chpst $PACKAGE_DIR/bin/gitlab-ci-multi-runner run \
       --config /var/vcap/store/gitlab-runner/config.toml \
+      --working-directory $WORK_DIR \
       1>>$LOG_DIR/stdout.log \
       2>>$LOG_DIR/stderr.log
 

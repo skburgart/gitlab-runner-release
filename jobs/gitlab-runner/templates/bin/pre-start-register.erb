@@ -2,18 +2,24 @@
 
 set -e
 
-mkdir -p /var/vcap/store/gitlab-runner
+STORE_DIR=/var/vcap/store/gitlab-runner
+BUILD_DIR=${STORE_DIR}/builds
+CACHE_DIR=${STORE_DIR}/cache
+
+mkdir -p $BUILD_DIR $CACHE_DIR
 
 RUNNER_NAME="<%= p('runner.name') %><% if p("runner.append_index") -%>-<%= spec.index %><% end -%>"
 
 /var/vcap/packages/gitlab-ci-multi-runner/bin/gitlab-ci-multi-runner register \
   --non-interactive \
-  --config /var/vcap/store/gitlab-runner/config.toml \
+  --config ${STORE_DIR}/config.toml \
   --name ${RUNNER_NAME} \
   --executor <%= p('runner.executor') %> \
   --url <%= p('runner.registration.url') %> \
 <% if_p('runner.tags') do | tags | -%>
   --tag-list <%= tags.join(',') %> \
 <% end -%>
+  --builds-dir ${BUILD_DIR} \
+  --cache-dir ${CACHE_DIR} \
   --registration-token <%= p('runner.registration.token') %>
 
